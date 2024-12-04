@@ -9,4 +9,4 @@ class UserLoginForm(forms.ModelForm):
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['nome', 'senha', 'email','cpf']
+        fields = ['nome', 'senha', 'cpf','email']

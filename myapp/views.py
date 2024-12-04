@@ -16,7 +16,7 @@ def login_view(request):
             }
 
             # Enviar formulário para a API (exemplo)
-            api_response = requests.post('http://127.0.0.1:5000/login', json=data)
+            api_response = requests.post('http://127.0.0.1:5001/login', json=data)
             # Lógica de tratamento da resposta da API#joga para view index
 
             if api_response.status_code == 200:
@@ -45,13 +45,26 @@ def register_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            # Enviar formulário para a API (exemplo)
-            api_response = requests.post('http://127.0.0.1:5000/register', data=form.cleaned_data)
-            # Lógica de tratamento da resposta da API#joga para view index
-            return redirect('index')
+            # Convertendo os dados do formulário para JSON
+            data = form.cleaned_data
+            
+            # Enviar dados para a API com o cabeçalho correto
+            api_response = requests.post(
+                'http://127.0.0.1:5001/register',
+                json=data,  # Usando o parâmetro 'json' para enviar como JSON
+                headers={'Content-Type': 'application/json'}  # Garantir o cabeçalho correto
+            )
+
+            # Lógica de tratamento da resposta da API
+            if api_response.status_code == 201:
+                info_message = "usuário cadastrado com sucesso."
+                return render(request, 'info.html', {'info_message': info_message})  # Redirecionar após sucesso
+            else:
+                # Aqui você pode lidar com falhas na API, como mostrar uma mensagem de erro
+                return render(request, 'register.html', {'form': form, 'error': 'Erro ao registrar usuário na API'})
     else:
         form = UserRegistrationForm()
-   
+
     return render(request, 'register.html', {'form': form})
 
 
