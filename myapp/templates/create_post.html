@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Post</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/create_post.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Criar Novo Post</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Criar Post</button>
+        </form>
+    </div>
+</body>
+</html>

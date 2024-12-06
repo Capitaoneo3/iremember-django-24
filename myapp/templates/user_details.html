@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Usuário</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn.jd1noticias.com/upload/dn_arquivo/2023/05/manoel-gomes-turne-estados-unidos.jpg'); /* Substitua pela URL da imagem de fundo */
+            background-size: cover; /* Faz com que a imagem cubra toda a área da tela */
+            background-position: center; /* Centraliza a imagem */
+            background-attachment: fixed; /* A imagem fica fixa ao rolar */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Faz a imagem de fundo cobrir toda a tela */
+        }
+
+        .container {
+            background-color: rgba(38, 0, 255, 0.8); /* Fundo branco semi-transparente */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            z-index: 10; /* Faz com que o formulário fique acima da imagem */
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para a foto */
+        .foto-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .foto-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+
+        /* Estilos para os campos de entrada */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Botão para alternar visibilidade da senha */
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 35%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Estilo para o botão de enviar */
+        .btn-info {
+            width: 100%;
+            background-color: #5a1dcc;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-info:hover {
+            background-color: #3023e0;
+        }
+    </style>
+    {% load static %}
+
+</head>
+<body>
+    <div class="container">
+        <h2>Informações do Usuario</h2>
+ 
+        <!-- Área para a foto -->
+        <div class="foto-container">
+            <img src="https://i0.wp.com/www.portalimaranhao.com.br/wp-content/uploads/2019/10/emanuel_gomes_-_caneta_azul.jpeg?fit=900%2C500&ssl=1" alt="Foto do Usuário" id="foto">
+        </div>
+
+        <!-- Formulário de informações -->
+        <form id="form-info">
+            <!-- Nome -->
+           
+            <input type="text" class="input-field" id="nome" placeholder="Nome"   value={{user_name}}>
+           
+            <!-- CPF -->
+            <input type="text" class="input-field" id="cpf" placeholder="user_cpf"  value={{user_cpf}}>
+
+            <!-- Senha -->
+            <div style="position: relative;">
+                <input type="password" class="input-field" id="senha" placeholder="Senha" required>
+                <span class="eye-icon" onclick="toggleSenha()">👁️</span>
+            </div>
+
+            <!-- Email -->
+            <input type="text" class="input-field" id="email" placeholder="Email" value={{user_email}}>
+
+            <!-- Botão de enviar -->
+            <button type="submit" class="btn-info">Salvar </button>
+        </form>
+    </div>
+
+    <script>
+        // Função para alternar a visibilidade da senha
+        function toggleSenha() {
+            var senhaInput = document.getElementById('senha');
+            var eyeIcon = document.querySelector('.eye-icon');
+
+            if (senhaInput.type === "password") {
+                senhaInput.type = "text";
+                eyeIcon.textContent = "🙈";  // Ícone para ocultar a senha
+            } else {
+                senhaInput.type = "password";
+                eyeIcon.textContent = "👁️";  // Ícone para mostrar a senha
+            }
+        }
+    </script>
+
+</body>
+</html>
