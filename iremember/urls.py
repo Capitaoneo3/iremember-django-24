@@ -21,9 +21,9 @@ from myapp.views.home_view import index, info_page
 from myapp.views.auth_view import login_view, register_view
 from myapp.views.user_view import user_details
 from myapp.views.create_post_view import create_post
-
+from myapp.views.post_view import  listar_posts
 urlpatterns = [
-    path('', create_post, name='create_post'),
+    path('', listar_posts, name='post'),
     path('info/', info_page, name='info'),
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
