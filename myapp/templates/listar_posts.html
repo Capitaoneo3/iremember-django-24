@@ -76,9 +76,15 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Posts</h1>
+
+        <!-- Formulário de Busca -->
+        <form method="GET" action="{% url 'listar_posts' %}">
+            <input type="text" name="search" placeholder="Buscar por título ou conteúdo" value="{{ search_query }}">
+            <button type="submit">Buscar</button>
+        </form>
+
         <ul>
             {% for post in page_obj %}
                 <li>
@@ -95,8 +101,8 @@
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; Primeira</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}">&laquo; Primeira</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Anterior</a>
                 {% endif %}
 
                 <span class="current">
@@ -104,8 +110,8 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Próxima</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}">Última &raquo;</a>
                 {% endif %}
             </span>
         </div>
